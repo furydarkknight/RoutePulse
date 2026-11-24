@@ -1,0 +1,21 @@
+# Render Blueprint - create it via: Dashboard -> New -> Blueprint -> pick this repo.
+services:
+  - type: web
+    name: routepulse-frontend
+    runtime: node
+    plan: free
+    # If your repo root is the folder that contains package.json, delete the next line.
+    rootDir: routepulsefrontend
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: NEXT_PUBLIC_API_BASE_URL
+        value: https://newhopoe.vercel.app
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false   # you will be asked for it in the dashboard
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        sync: false
